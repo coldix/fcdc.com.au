@@ -2,16 +2,17 @@ name: Deploy to Hostinger (SFTP)
 
 on:
   push:
-    branches:
-      - main
+    branches: ["main"]
   workflow_dispatch:
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
-
     steps:
-     - name: Upload via SFTP
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Deploy via SFTP
         uses: wlixcc/SFTP-Deploy-Action@v1.2.5
         with:
           username: ${{ secrets.SFTP_USER }}
@@ -21,5 +22,5 @@ jobs:
           remote_path: ${{ secrets.SFTP_PATH }}
           sftp_only: true
           delete_remote_files: false
-          local_path: "./"
-          rsyncArgs: "-av --exclude=.git --exclude=.github --exclude=.DS_Store"
+          local_path: ./
+          rsyncArgs: -av --exclude=.git --exclude=.github --exclude=.DS_Store
