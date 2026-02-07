@@ -1,0 +1,26 @@
+name: Deploy to Hostinger (SFTP)
+
+on:
+  push:
+    branches: ["main"]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Upload via SFTP
+        uses: wlixcc/SFTP-Deploy-Action@v1.2.5
+        with:
+          username: ${{ secrets.SFTP_USER }}
+          server: ${{ secrets.SFTP_HOST }}
+          port: ${{ secrets.SFTP_PORT }}
+          password: ${{ secrets.SFTP_PASS }}
+          local_path: "./*"
+          remote_path: ${{ secrets.SFTP_PATH }}
+          sftp_only: true
+          delete_remote_files: false
+          exclude: ".git*,.github*,README.md"
