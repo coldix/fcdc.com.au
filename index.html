@@ -1,22 +1,91 @@
 <!doctype html>
-<html lang="en">
+<html lang="en-AU">
   <head>
+    <!-- 
+    # Project: First Class Drain Cleaning ~ fcdc.com.au
+    # Author: Colin Dixon BSc, DipEd, Cert IV TAE
+    # Contact: crdixon@gmail.com
+    # Timestamp: 07/02/2026 08:45 PM AEDT
+    # Version: 26.02.002
+    # File Name: index.html
+    # Description: Upgrade to V1-11-02. Added theme toggle and meta tags.
+    -->
+
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>First Class Drain Cleaning | Melbourne</title>
+
+    <!-- OzeGlass Administrative Tags -->
+    <meta name="author" content="Colin Dixon BSc, DipEd, Cert IV TAE" />
+    <meta name="version" content="26.02.002" />
+    <meta name="timestamp" content="07/02/2026 08:45 PM AEDT" />
+
+    <!-- SEO & Social -->
     <meta
       name="description"
       content="Specialist drain cleaning for plumbers and property owners in Melbourne. We only do drains. 24/7 Emergency Service."
     />
 
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:title"
+      content="First Class Drain Cleaning | Melbourne"
+    />
+    <meta
+      property="og:description"
+      content="Specialist drain cleaning for plumbers and property owners in Melbourne. 24/7 Emergency Service."
+    />
+    <meta property="og:image" content="images/fcdc-logo-blue.webp" />
+    <meta property="og:url" content="https://fcdc.com.au/" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="First Class Drain Cleaning | Melbourne"
+    />
+    <meta
+      name="twitter:description"
+      content="Specialist drain cleaning for plumbers and property owners in Melbourne."
+    />
+    <meta name="twitter:image" content="images/fcdc-logo-blue.webp" />
+
+    <!-- JSON-LD Schema -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "name": "First Class Drain Cleaning",
+        "image": "https://fcdc.com.au/images/fcdc-logo-blue.webp",
+        "telephone": "0412 199 789",
+        "email": "admin@fcdc.com.au",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Burwood Heights",
+          "addressRegion": "VIC",
+          "postalCode": "3151",
+          "addressCountry": "AU"
+        },
+        "url": "https://fcdc.com.au/"
+      }
+    </script>
+
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap"
       rel="stylesheet"
     />
+
+    <link rel="stylesheet" href="style.css" />
   </head>
+
   <body>
+    <!-- Floating Theme Pill -->
+    <button id="theme-toggle" class="theme-pill" aria-label="Toggle Dark Mode">
+      <span class="icon">☀</span>
+    </button>
+
     <div class="wrapper">
       <header>
         <img
@@ -24,22 +93,21 @@
           alt="FCDC Logo"
           class="logo-img"
         />
-
         <h1 class="business-name">First Class Drain Cleaning</h1>
 
         <div
-          class="ozeglass-container"
+          class="glass-card"
           style="display: inline-block; padding: 1.5rem 3rem"
         >
           <div class="phone-number">0412 199 789</div>
-          <p style="margin: 0; color: #fff; font-weight: 600">
+          <p style="margin: 0; color: var(--text-main); font-weight: 600">
             "We always answer the phone and we always say yes"
           </p>
           <a href="tel:0412199789" class="btn-cta">Call Emergency 24/7</a>
         </div>
       </header>
 
-      <div class="ozeglass-container">
+      <div class="glass-card">
         <div class="hero-split">
           <div class="hero-image">
             <img
@@ -62,9 +130,8 @@
           </div>
         </div>
       </div>
-      <link rel="stylesheet" href="style.css" />
 
-      <div class="ozeglass-container" style="border-color: var(--accent-color)">
+      <div class="glass-card" style="border-color: var(--accent-color)">
         <h2>For Plumbers: We Are Your Team</h2>
         <p>
           Other plumbers are our business. We act as a silent partner to over
@@ -97,30 +164,30 @@
         </ul>
       </div>
 
-      <div class="ozeglass-container">
+      <div class="glass-card">
         <h2>Our Services</h2>
-        <div class="services-grid">
-          <div class="service-item">
+        <div class="item-grid">
+          <div class="item-card">
             <h3>Blocked Drains</h3>
             <p>
               Clearing residential and commercial blockages quickly (showers,
               basins, baths, sinks).
             </p>
           </div>
-          <div class="service-item">
+          <div class="item-card">
             <h3>CCTV Diagnostic</h3>
             <p>
               Drain camera with recording to see the problem clearly and provide
               reports.
             </p>
           </div>
-          <div class="service-item">
+          <div class="item-card">
             <h3>High Pressure Jet</h3>
             <p>
               Water jetting to scrub pipes clean and remove stubborn debris.
             </p>
           </div>
-          <div class="service-item">
+          <div class="item-card">
             <h3>Navi Track</h3>
             <p>
               Pinpoint location of underground pipes and defects to minimize
@@ -130,65 +197,41 @@
         </div>
       </div>
 
-      <div class="ozeglass-container">
+      <div class="glass-card">
         <h2>What People Say</h2>
-        <p
-          style="
-            font-style: italic;
-            border-left: 4px solid var(--accent-color);
-            padding-left: 1rem;
-            background: rgba(255, 255, 255, 0.05);
-            padding: 1rem;
-            border-radius: 0 8px 8px 0;
-          "
-        >
-          "One plumber I wouldn’t hesitate in recommending is Frank. He is
-          professional, reliable and does a great job. With one phone call the
-          job is sorted out, without any more work from me."
-          <br /><strong style="color: #fff; display: block; margin-top: 0.5rem"
-            >– Barry Lindsey, Builder (Boronia)</strong
-          >
-        </p>
-        <p
-          style="
-            margin-top: 1.5rem;
-            font-style: italic;
-            border-left: 4px solid var(--accent-color);
-            padding-left: 1rem;
-            background: rgba(255, 255, 255, 0.05);
-            padding: 1rem;
-            border-radius: 0 8px 8px 0;
-          "
-        >
-          "My one and only toilet was blocked... Frank came over soon after and
-          quickly fixed the problem. He was quick, clean and friendly. He saved
-          my night."
-          <br /><strong style="color: #fff; display: block; margin-top: 0.5rem"
-            >– Carole Gillies (Mulgrave)</strong
-          >
-        </p>
-        <p
-          style="
-            margin-top: 1.5rem;
-            font-style: italic;
-            border-left: 4px solid var(--accent-color);
-            padding-left: 1rem;
-            background: rgba(255, 255, 255, 0.05);
-            padding: 1rem;
-            border-radius: 0 8px 8px 0;
-          "
-        >
-          "I use Frank from FCDC. He has all the up to date equipment... He
-          looks after my customers in a professional manner... My business
-          wouldn’t be the same without him."
-          <br /><strong style="color: #fff; display: block; margin-top: 0.5rem"
-            >– Peter Laspatzis, Suburban Gas and Plumbing</strong
-          >
-        </p>
+
+        <div class="testimonial-block">
+          <p>
+            "One plumber I wouldn’t hesitate in recommending is Frank. He is
+            professional, reliable and does a great job. With one phone call the
+            job is sorted out, without any more work from me."
+          </p>
+          <strong>– Barry Lindsey, Builder (Boronia)</strong>
+        </div>
+
+        <div class="testimonial-block">
+          <p>
+            "My one and only toilet was blocked... Frank came over soon after
+            and quickly fixed the problem. He was quick, clean and friendly. He
+            saved my night."
+          </p>
+          <strong>– Carole Gillies (Mulgrave)</strong>
+        </div>
+
+        <div class="testimonial-block">
+          <p>
+            "I use Frank from FCDC. He has all the up to date equipment... He
+            looks after my customers in a professional manner... My business
+            wouldn’t be the same without him."
+          </p>
+          <strong>– Peter Laspatzis, Suburban Gas and Plumbing</strong>
+        </div>
       </div>
 
       <footer>
-        <p style="font-size: 1.2rem; font-weight: bold; color: #fff">
+        <p
+          style="font-size: 1.2rem; font-weight: bold; color: var(--text-main)"
+        >
           First Class Drain Cleaning (FCDC)
         </p>
         <p>PO Box 8099, Burwood Heights, VIC 3151</p>
@@ -199,12 +242,10 @@
           >
         </p>
         <br />
-        <div class="footer-credit">
-          Website by Colin Dixon
-          <a href="https://oze.au/" target="_blank">oze.au</a>
-        </div>
+        <div class="footer-credit"></div>
       </footer>
     </div>
+
     <script src="script.js"></script>
   </body>
 </html>

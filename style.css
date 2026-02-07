@@ -1,17 +1,30 @@
-/* --- OzeGlass Design Standard Variables --- */
+/* 
+# Project: First Class Drain Cleaning ~ fcdc.com.au
+# Author: Colin Dixon BSc, DipEd, Cert IV TAE
+# Contact: crdixon@gmail.com
+# Timestamp: 07/02/2026 08:45 PM AEDT
+# Version: 26.02.002
+# File Name: style.css
+# Description: Implements OzeGlass V1-11-02 standards with Light/Dark Theme support.
+*/
+
+/* --- Theme Variables --- */
 :root {
-  --bg-image: url("images/water-bg.webp");
+  /* Default Dark Mode */
+  --bg-image: url("images/water-bg.webp"); /* Ensure this image works for dark mode */
+  --bg-color: #0f2027;
 
   /* Glass Settings */
   --glass-bg: rgba(15, 32, 39, 0.85);
   --glass-border: rgba(255, 255, 255, 0.25);
   --glass-blur: 16px;
+  --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
 
   /* Text Colors */
   --text-main: #ffffff;
   --text-muted: #e0e0e0;
 
-  /* Deep Blue Accent */
+  /* Accent */
   --accent-color: #2b95e3;
   --accent-gradient: linear-gradient(
     135deg,
@@ -19,8 +32,21 @@
     #2989d8 50%,
     #7db9e8 100%
   );
+}
 
-  --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
+/* Light Mode Overrides */
+[data-theme="light"] {
+  --bg-image: none;
+  --bg-color: #eef2f5;
+
+  --glass-bg: rgba(255, 255, 255, 0.75);
+  --glass-border: rgba(0, 0, 0, 0.1);
+  --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
+
+  --text-main: #1a1a1a;
+  --text-muted: #4a4a4a;
+
+  --accent-color: #0d47a1;
 }
 
 /* --- Reset & Base --- */
@@ -32,15 +58,43 @@
 
 body {
   font-family: "Inter", sans-serif;
-  background: var(--bg-image) no-repeat center center fixed;
+  background: var(--bg-color) var(--bg-image) no-repeat center center fixed;
   background-size: cover;
   color: var(--text-main);
   min-height: 100vh;
   line-height: 1.6;
+  transition:
+    background 0.3s ease,
+    color 0.3s ease;
+}
+
+/* --- Floating Theme Pill --- */
+.theme-pill {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border-radius: 50px;
+  padding: 10px 15px;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  font-size: 1.2rem;
+  transition: transform 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.theme-pill:hover {
+  transform: scale(1.05);
 }
 
 /* --- OzeGlass Container Utility --- */
-.ozeglass-container {
+.glass-card {
   background: var(--glass-bg);
   backdrop-filter: blur(var(--glass-blur));
   -webkit-backdrop-filter: blur(var(--glass-blur));
@@ -50,6 +104,9 @@ body {
   padding: 2.5rem;
   margin-bottom: 2rem;
   overflow: hidden;
+  transition:
+    background 0.3s ease,
+    border-color 0.3s ease;
 }
 
 /* --- Layout --- */
@@ -73,18 +130,26 @@ header {
   filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.6));
 }
 
-/* The New Business Name Title */
 h1.business-name {
   font-size: 2.5rem;
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: -1px;
   margin-bottom: 1.5rem;
-  background: linear-gradient(to right, #ffffff, #b3e5fc);
+  background: linear-gradient(to right, var(--text-main), #b3e5fc);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent; /* Fallback for browsers */
+  background-clip: text;
+  color: var(--text-main); /* Fallback */
+  text-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  line-height: 1.1;
+}
+
+/* Fix for gradient text in light mode */
+[data-theme="light"] h1.business-name {
+  background: linear-gradient(to right, #0d47a1, #2196f3);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-  line-height: 1.1;
 }
 
 h2 {
@@ -93,14 +158,15 @@ h2 {
   margin-bottom: 1rem;
   text-transform: uppercase;
   letter-spacing: 1px;
-  text-shadow: 0 0 10px rgba(43, 149, 227, 0.4);
 }
+
 h3 {
   font-size: 1.3rem;
   margin-bottom: 0.5rem;
-  color: #fff;
+  color: var(--text-main);
   font-weight: 600;
 }
+
 p {
   margin-bottom: 1rem;
   color: var(--text-muted);
@@ -124,6 +190,7 @@ p {
   text-transform: uppercase;
   border: 1px solid rgba(255, 255, 255, 0.3);
 }
+
 .btn-cta:hover {
   transform: translateY(-3px);
   box-shadow: 0 0 25px var(--accent-color);
@@ -132,8 +199,7 @@ p {
 .phone-number {
   font-size: 2rem;
   font-weight: 800;
-  color: #fff;
-  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+  color: var(--text-main);
   display: block;
   margin: 0.5rem 0;
 }
@@ -145,15 +211,18 @@ p {
   align-items: center;
   gap: 2rem;
 }
+
 .hero-text {
   flex: 1;
   min-width: 300px;
 }
+
 .hero-image {
   flex: 1;
   min-width: 300px;
   text-align: center;
 }
+
 .hero-image img {
   width: 100%;
   border-radius: 12px;
@@ -161,22 +230,53 @@ p {
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
 }
 
-/* --- Services Grid --- */
-.services-grid {
+/* --- Item Grid (Formerly Services Grid) --- */
+.item-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 1.5rem;
   margin-top: 2rem;
 }
-.service-item {
-  background: rgba(0, 0, 0, 0.3);
+
+.item-card {
+  background: rgba(0, 0, 0, 0.2);
   padding: 1.5rem;
   border-radius: 12px;
   border-left: 4px solid var(--accent-color);
   transition: background 0.3s ease;
 }
-.service-item:hover {
+
+[data-theme="light"] .item-card {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.item-card:hover {
   background: rgba(255, 255, 255, 0.05);
+}
+
+[data-theme="light"] .item-card:hover {
+  background: rgba(255, 255, 255, 0.8);
+}
+
+/* --- Testimonials --- */
+.testimonial-block {
+  margin-top: 1.5rem;
+  font-style: italic;
+  border-left: 4px solid var(--accent-color);
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 0 8px 8px 0;
+}
+
+[data-theme="light"] .testimonial-block {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.testimonial-block strong {
+  color: var(--text-main);
+  display: block;
+  margin-top: 0.5rem;
+  font-style: normal;
 }
 
 /* --- Footer --- */
@@ -185,20 +285,24 @@ footer {
   margin-top: 4rem;
   padding: 2rem;
   font-size: 0.9rem;
-  color: rgba(255, 255, 255, 0.8);
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+  width: 100vw;
+  margin-left: calc(-50vw + 50%); /* Break out of container */
+  color: var(--text-muted);
 }
+
 .footer-link {
   color: var(--accent-color);
   text-decoration: none;
   font-weight: 600;
 }
+
 .footer-credit {
   font-size: 0.8rem;
   opacity: 0.7;
   margin-top: 1rem;
 }
+
 .footer-credit a {
-  color: #fff;
+  color: var(--text-main);
   text-decoration: underline;
 }
