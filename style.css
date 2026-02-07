@@ -2,29 +2,31 @@
 # Project: First Class Drain Cleaning ~ fcdc.com.au
 # Author: Colin Dixon BSc, DipEd, Cert IV TAE
 # Contact: crdixon@gmail.com
-# Timestamp: 07/02/2026 08:45 PM AEDT
-# Version: 26.02.002
+# Timestamp: 07/02/2026 09:55 PM AEDT
+# Version: 26.02.003
 # File Name: style.css
-# Description: Implements OzeGlass V1-11-02 standards with Light/Dark Theme support.
+# Description: OzeGlass V1-11-02 – Glass UI with Light/Dark themes and background imagery.
 */
 
-/* --- Theme Variables --- */
+/* ----------------------------
+   THEME VARIABLES
+---------------------------- */
+
 :root {
-  /* Default Dark Mode */
-  --bg-image: url("images/water-bg.webp"); /* Ensure this image works for dark mode */
-  --bg-color: #0f2027;
+  /* Dark theme defaults */
+  --bg-image: url("/images/bg2-glass.webp");
+  --bg-color: #0b1220;
 
-  /* Glass Settings */
-  --glass-bg: rgba(15, 32, 39, 0.85);
-  --glass-border: rgba(255, 255, 255, 0.25);
+  --glass-bg: rgba(10, 18, 32, 0.32);
+  --glass-border: rgba(255, 255, 255, 0.18);
   --glass-blur: 16px;
-  --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
 
-  /* Text Colors */
-  --text-main: #ffffff;
-  --text-muted: #e0e0e0;
+  --glass-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.06) inset, 0 18px 45px rgba(0, 0, 0, 0.55);
 
-  /* Accent */
+  --text-main: rgba(255, 255, 255, 0.94);
+  --text-muted: rgba(255, 255, 255, 0.72);
+
   --accent-color: #2b95e3;
   --accent-gradient: linear-gradient(
     135deg,
@@ -34,22 +36,30 @@
   );
 }
 
-/* Light Mode Overrides */
-[data-theme="light"] {
-  --bg-image: none;
-  --bg-color: #eef2f5;
+/* ----------------------------
+   LIGHT THEME OVERRIDES
+---------------------------- */
 
-  --glass-bg: rgba(255, 255, 255, 0.75);
-  --glass-border: rgba(0, 0, 0, 0.1);
-  --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
+html[data-theme="light"] {
+  --bg-image: url("/images/bg1-glass.webp");
+  --bg-color: #eef2f6;
 
-  --text-main: #1a1a1a;
-  --text-muted: #4a4a4a;
+  --glass-bg: rgba(255, 255, 255, 0.55);
+  --glass-border: rgba(0, 0, 0, 0.12);
+
+  --glass-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.65) inset, 0 12px 32px rgba(0, 0, 0, 0.18);
+
+  --text-main: #16202a;
+  --text-muted: #3f4b57;
 
   --accent-color: #0d47a1;
 }
 
-/* --- Reset & Base --- */
+/* ----------------------------
+   RESET & BASE
+---------------------------- */
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -58,65 +68,96 @@
 
 body {
   font-family: "Inter", sans-serif;
-  background: var(--bg-color) var(--bg-image) no-repeat center center fixed;
+  background-color: var(--bg-color);
+  background-image: var(--bg-image);
   background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
   color: var(--text-main);
   min-height: 100vh;
   line-height: 1.6;
   transition:
-    background 0.3s ease,
+    background-color 0.3s ease,
+    background-image 0.3s ease,
     color 0.3s ease;
 }
 
-/* --- Floating Theme Pill --- */
+/* ----------------------------
+   FLOATING THEME TOGGLE
+---------------------------- */
+
 .theme-pill {
   position: fixed;
   top: 20px;
   right: 20px;
   z-index: 1000;
+
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
   background: var(--glass-bg);
   border: 1px solid var(--glass-border);
   backdrop-filter: blur(var(--glass-blur));
   -webkit-backdrop-filter: blur(var(--glass-blur));
-  border-radius: 50px;
-  padding: 10px 15px;
+
+  border-radius: 999px;
+  padding: 10px 14px;
+
   cursor: pointer;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-  font-size: 1.2rem;
+  font-size: 1rem;
+  color: var(--text-main);
+
+  box-shadow: var(--glass-shadow);
   transition: transform 0.2s ease;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 .theme-pill:hover {
   transform: scale(1.05);
 }
 
-/* --- OzeGlass Container Utility --- */
-.glass-card {
-  background: var(--glass-bg);
-  backdrop-filter: blur(var(--glass-blur));
-  -webkit-backdrop-filter: blur(var(--glass-blur));
-  border: 1px solid var(--glass-border);
-  border-radius: 20px;
-  box-shadow: var(--glass-shadow);
-  padding: 2.5rem;
-  margin-bottom: 2rem;
-  overflow: hidden;
-  transition:
-    background 0.3s ease,
-    border-color 0.3s ease;
+.theme-label {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  user-select: none;
 }
 
-/* --- Layout --- */
+/* ----------------------------
+   GLASS CARD UTILITY
+---------------------------- */
+
+.glass-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur)) saturate(140%);
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(140%);
+  border: 1px solid var(--glass-border);
+  border-radius: 20px;
+
+  box-shadow: var(--glass-shadow);
+
+  padding: 2.5rem;
+  margin-bottom: 2rem;
+
+  transition:
+    background 0.3s ease,
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+/* ----------------------------
+   LAYOUT
+---------------------------- */
+
 .wrapper {
   max-width: 900px;
   margin: 0 auto;
   padding: 2rem 1rem;
 }
 
-/* --- Header Styling --- */
+/* ----------------------------
+   HEADER
+---------------------------- */
+
 header {
   text-align: center;
   margin-bottom: 2rem;
@@ -127,7 +168,7 @@ header {
   width: 450px;
   height: auto;
   margin-bottom: 1rem;
-  filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.6));
+  filter: drop-shadow(0 6px 18px rgba(0, 0, 0, 0.5));
 }
 
 h1.business-name {
@@ -136,21 +177,22 @@ h1.business-name {
   text-transform: uppercase;
   letter-spacing: -1px;
   margin-bottom: 1.5rem;
+
   background: linear-gradient(to right, var(--text-main), #b3e5fc);
   -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent; /* Fallback for browsers */
+  -webkit-text-fill-color: transparent;
   background-clip: text;
-  color: var(--text-main); /* Fallback */
-  text-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  line-height: 1.1;
 }
 
-/* Fix for gradient text in light mode */
-[data-theme="light"] h1.business-name {
+html[data-theme="light"] h1.business-name {
   background: linear-gradient(to right, #0d47a1, #2196f3);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
+
+/* ----------------------------
+   TYPOGRAPHY
+---------------------------- */
 
 h2 {
   color: var(--accent-color);
@@ -173,38 +215,43 @@ p {
   font-size: 1.05rem;
 }
 
+/* ----------------------------
+   CTA
+---------------------------- */
+
 .btn-cta {
   display: inline-block;
   background: var(--accent-gradient);
   color: #fff;
   padding: 1rem 2.5rem;
-  border-radius: 50px;
+  border-radius: 999px;
   text-decoration: none;
   font-weight: 800;
   font-size: 1.2rem;
   margin-top: 1rem;
-  box-shadow: 0 4px 15px rgba(30, 87, 153, 0.5);
+  box-shadow: 0 6px 22px rgba(30, 87, 153, 0.45);
   transition:
     transform 0.2s ease,
     box-shadow 0.2s ease;
   text-transform: uppercase;
-  border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
 .btn-cta:hover {
   transform: translateY(-3px);
-  box-shadow: 0 0 25px var(--accent-color);
+  box-shadow: 0 0 30px var(--accent-color);
 }
 
 .phone-number {
   font-size: 2rem;
   font-weight: 800;
   color: var(--text-main);
-  display: block;
   margin: 0.5rem 0;
 }
 
-/* --- Hero Section --- */
+/* ----------------------------
+   HERO
+---------------------------- */
+
 .hero-split {
   display: flex;
   flex-wrap: wrap;
@@ -212,81 +259,89 @@ p {
   gap: 2rem;
 }
 
-.hero-text {
-  flex: 1;
-  min-width: 300px;
-}
-
+.hero-text,
 .hero-image {
   flex: 1;
   min-width: 300px;
-  text-align: center;
 }
 
 .hero-image img {
   width: 100%;
-  border-radius: 12px;
-  border: 2px solid var(--glass-border);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  border-radius: 14px;
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 14px 38px rgba(0, 0, 0, 0.45);
 }
 
-/* --- Item Grid (Formerly Services Grid) --- */
+/* ----------------------------
+   SERVICES GRID
+---------------------------- */
+
 .item-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 1.5rem;
   margin-top: 2rem;
 }
 
 .item-card {
-  background: rgba(0, 0, 0, 0.2);
-  padding: 1.5rem;
-  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.06);
+  padding: 1.6rem;
+  border-radius: 14px;
   border-left: 4px solid var(--accent-color);
-  transition: background 0.3s ease;
+
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.25) inset,
+    0 8px 22px rgba(0, 0, 0, 0.25);
+
+  transition:
+    background 0.3s ease,
+    transform 0.2s ease;
 }
 
-[data-theme="light"] .item-card {
-  background: rgba(255, 255, 255, 0.5);
+html[data-theme="light"] .item-card {
+  background: rgba(255, 255, 255, 0.7);
 }
 
 .item-card:hover {
-  background: rgba(255, 255, 255, 0.05);
+  transform: translateY(-2px);
 }
 
-[data-theme="light"] .item-card:hover {
-  background: rgba(255, 255, 255, 0.8);
-}
+/* ----------------------------
+   TESTIMONIALS
+---------------------------- */
 
-/* --- Testimonials --- */
 .testimonial-block {
   margin-top: 1.5rem;
   font-style: italic;
   border-left: 4px solid var(--accent-color);
-  padding: 1rem;
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 0 8px 8px 0;
+  padding: 1.2rem;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 0 10px 10px 0;
 }
 
-[data-theme="light"] .testimonial-block {
+html[data-theme="light"] .testimonial-block {
   background: rgba(0, 0, 0, 0.05);
 }
 
 .testimonial-block strong {
-  color: var(--text-main);
   display: block;
   margin-top: 0.5rem;
+  color: var(--text-main);
   font-style: normal;
 }
 
-/* --- Footer --- */
+/* ----------------------------
+   FOOTER
+---------------------------- */
+
 footer {
   text-align: center;
   margin-top: 4rem;
   padding: 2rem;
   font-size: 0.9rem;
+
   width: 100vw;
-  margin-left: calc(-50vw + 50%); /* Break out of container */
+  margin-left: calc(-50vw + 50%);
   color: var(--text-muted);
 }
 
@@ -300,9 +355,4 @@ footer {
   font-size: 0.8rem;
   opacity: 0.7;
   margin-top: 1rem;
-}
-
-.footer-credit a {
-  color: var(--text-main);
-  text-decoration: underline;
 }

@@ -1,14 +1,14 @@
 <!doctype html>
-<html lang="en-AU">
+<html lang="en-AU" data-theme="dark">
   <head>
     <!-- 
     # Project: First Class Drain Cleaning ~ fcdc.com.au
     # Author: Colin Dixon BSc, DipEd, Cert IV TAE
     # Contact: crdixon@gmail.com
     # Timestamp: 07/02/2026 08:45 PM AEDT
-    # Version: 26.02.002
+    # Version: 26.02.003
     # File Name: index.html
-    # Description: Upgrade to V1-11-02. Added theme toggle and meta tags.
+    # Description: Theme toggle label + manifest/icon links + admin email update.
     -->
 
     <meta charset="UTF-8" />
@@ -17,15 +17,23 @@
 
     <!-- OzeGlass Administrative Tags -->
     <meta name="author" content="Colin Dixon BSc, DipEd, Cert IV TAE" />
-    <meta name="version" content="26.02.002" />
-    <meta name="timestamp" content="07/02/2026 08:45 PM AEDT" />
+    <meta name="version" content="26.02.003" />
+    <meta name="timestamp" content="07/02/2026 09:40 PM AEDT" />
 
-    <!-- SEO & Social -->
+    <!-- SEO -->
     <meta
       name="description"
       content="Specialist drain cleaning for plumbers and property owners in Melbourne. We only do drains. 24/7 Emergency Service."
     />
+    <link rel="canonical" href="https://fcdc.com.au/" />
 
+    <!-- Favicons / App -->
+    <link rel="icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="theme-color" content="#0a2a43" />
+
+    <!-- Social -->
     <meta property="og:type" content="website" />
     <meta
       property="og:title"
@@ -35,7 +43,10 @@
       property="og:description"
       content="Specialist drain cleaning for plumbers and property owners in Melbourne. 24/7 Emergency Service."
     />
-    <meta property="og:image" content="images/fcdc-logo-blue.webp" />
+    <meta
+      property="og:image"
+      content="https://fcdc.com.au/images/fcdc-logo-blue.webp"
+    />
     <meta property="og:url" content="https://fcdc.com.au/" />
 
     <meta name="twitter:card" content="summary_large_image" />
@@ -47,7 +58,10 @@
       name="twitter:description"
       content="Specialist drain cleaning for plumbers and property owners in Melbourne."
     />
-    <meta name="twitter:image" content="images/fcdc-logo-blue.webp" />
+    <meta
+      name="twitter:image"
+      content="https://fcdc.com.au/images/fcdc-logo-blue.webp"
+    />
 
     <!-- JSON-LD Schema -->
     <script type="application/ld+json">
@@ -57,7 +71,7 @@
         "name": "First Class Drain Cleaning",
         "image": "https://fcdc.com.au/images/fcdc-logo-blue.webp",
         "telephone": "0412 199 789",
-        "email": "admin@fcdc.com.au",
+        "email": "accounts@fcdc.com.au",
         "address": {
           "@type": "PostalAddress",
           "addressLocality": "Burwood Heights",
@@ -81,9 +95,15 @@
   </head>
 
   <body>
-    <!-- Floating Theme Pill -->
-    <button id="theme-toggle" class="theme-pill" aria-label="Toggle Dark Mode">
-      <span class="icon">☀</span>
+    <!-- Floating Theme Pill (icon + label) -->
+    <button
+      id="theme-toggle"
+      class="theme-pill"
+      type="button"
+      aria-label="Toggle theme"
+    >
+      <span class="icon" aria-hidden="true">🌙</span>
+      <span id="theme-label" class="theme-label">Dark</span>
     </button>
 
     <div class="wrapper">
@@ -237,8 +257,8 @@
         <p>PO Box 8099, Burwood Heights, VIC 3151</p>
         <p>
           Admin:
-          <a href="mailto:admin@fcdc.com.au" class="footer-link"
-            >admin@fcdc.com.au</a
+          <a href="mailto:accounts@fcdc.com.au" class="footer-link"
+            >accounts@fcdc.com.au</a
           >
         </p>
         <br />
