@@ -11,10 +11,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Upload via SFTP
+     - name: Upload via SFTP
         uses: wlixcc/SFTP-Deploy-Action@v1.2.5
         with:
           username: ${{ secrets.SFTP_USER }}
@@ -24,8 +21,5 @@ jobs:
           remote_path: ${{ secrets.SFTP_PATH }}
           sftp_only: true
           delete_remote_files: false
-          local_path: |
-            index.html
-            style.css
-            script.js
-            images/*
+          local_path: "./"
+          rsyncArgs: "-av --exclude=.git --exclude=.github --exclude=.DS_Store"
