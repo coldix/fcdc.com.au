@@ -1,69 +1,64 @@
-/* 
-# Project: First Class Drain Cleaning ~ fcdc.com.au
-# Author: Colin Dixon BSc, DipEd, Cert IV TAE
-# Contact: crdixon@gmail.com
-# Timestamp: 07/02/2026 09:55 PM AEDT
-# Version: 26.02.003
-# File Name: style.css
-# Description: OzeGlass V1-11-02 – Glass UI with Light/Dark themes and background imagery.
+/*
+  # Project: First Class Drain Cleaning ~ fcdc.com.au
+  # Author: Colin Dixon BSc, DipEd, Cert IV TAE
+  # Contact: crdixon@gmail.com
+  # Timestamp: 11/02/2026 02:20 PM AEDT
+  # Version: 26.02.008
+  # File Name: style.css
+  # Description: 25% Opacity, 6px Blur, Consistent Footer.
 */
 
-/* ----------------------------
-   THEME VARIABLES
----------------------------- */
-
 :root {
-  /* Dark theme defaults */
-  --bg-image: url("/images/bg2-glass.webp");
+  /* Dark Mode Variables */
+  --bg-image: url("images/bg2-glass.webp");
   --bg-color: #0b1220;
 
-  --glass-bg: rgba(10, 18, 32, 0.32);
-  --glass-border: rgba(255, 255, 255, 0.18);
-  --glass-blur: 16px;
+  /* 25% Opacity (More Transparent) */
+  --glass-bg: rgba(10, 18, 32, 0.25);
+
+  --glass-border: rgba(255, 255, 255, 0.15);
+
+  /* 6px Blur (Subtle) */
+  --glass-blur: 6px;
 
   --glass-shadow:
     0 1px 0 rgba(255, 255, 255, 0.06) inset, 0 18px 45px rgba(0, 0, 0, 0.55);
 
   --text-main: rgba(255, 255, 255, 0.94);
-  --text-muted: rgba(255, 255, 255, 0.72);
+  --text-muted: rgba(
+    255,
+    255,
+    255,
+    0.85
+  ); /* Slightly brighter for readability on clear glass */
 
   --accent-color: #2b95e3;
-  --accent-gradient: linear-gradient(
-    135deg,
-    #1e5799 0%,
-    #2989d8 50%,
-    #7db9e8 100%
-  );
-}
 
-/* ----------------------------
-   LIGHT THEME OVERRIDES
----------------------------- */
+  /* Chrome 3D Effect */
+  --chrome-gradient: linear-gradient(180deg, #4facfe 0%, #00f2fe 100%);
+  --chrome-border: 1px solid rgba(255, 255, 255, 0.6);
+  --btn-shadow:
+    0 4px 15px rgba(0, 242, 254, 0.3), 0 1px 0 rgba(255, 255, 255, 0.4) inset;
+}
 
 html[data-theme="light"] {
-  --bg-image: url("/images/bg1-glass.webp");
+  --bg-image: url("images/bg1-glass.webp");
   --bg-color: #eef2f6;
 
-  --glass-bg: rgba(255, 255, 255, 0.55);
-  --glass-border: rgba(0, 0, 0, 0.12);
+  /* Light Mode 25% Opacity */
+  --glass-bg: rgba(255, 255, 255, 0.25);
 
+  --glass-border: rgba(255, 255, 255, 0.4);
   --glass-shadow:
-    0 1px 0 rgba(255, 255, 255, 0.65) inset, 0 12px 32px rgba(0, 0, 0, 0.18);
-
+    0 1px 0 rgba(255, 255, 255, 0.65) inset, 0 12px 32px rgba(0, 0, 0, 0.1);
   --text-main: #16202a;
-  --text-muted: #3f4b57;
-
+  --text-muted: #111; /* Darker text for contrast on light glass */
   --accent-color: #0d47a1;
-}
 
-/* ----------------------------
-   RESET & BASE
----------------------------- */
-
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+  /* Light Mode Chrome */
+  --chrome-gradient: linear-gradient(180deg, #1e5799 0%, #2989d8 100%);
+  --btn-shadow:
+    0 4px 15px rgba(41, 137, 216, 0.4), 0 1px 0 rgba(255, 255, 255, 0.3) inset;
 }
 
 body {
@@ -74,285 +69,239 @@ body {
   background-position: center;
   background-attachment: fixed;
   color: var(--text-main);
+  margin: 0;
   min-height: 100vh;
-  line-height: 1.6;
   transition:
-    background-color 0.3s ease,
-    background-image 0.3s ease,
-    color 0.3s ease;
+    background-image 0.5s ease,
+    background-color 0.5s ease;
 }
-
-/* ----------------------------
-   FLOATING THEME TOGGLE
----------------------------- */
-
-.theme-pill {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  z-index: 1000;
-
-  display: flex;
-  align-items: center;
-  gap: 8px;
-
-  background: var(--glass-bg);
-  border: 1px solid var(--glass-border);
-  backdrop-filter: blur(var(--glass-blur));
-  -webkit-backdrop-filter: blur(var(--glass-blur));
-
-  border-radius: 999px;
-  padding: 10px 14px;
-
-  cursor: pointer;
-  font-size: 1rem;
-  color: var(--text-main);
-
-  box-shadow: var(--glass-shadow);
-  transition: transform 0.2s ease;
-}
-
-.theme-pill:hover {
-  transform: scale(1.05);
-}
-
-.theme-label {
-  font-size: 0.9rem;
-  color: var(--text-muted);
-  user-select: none;
-}
-
-/* ----------------------------
-   GLASS CARD UTILITY
----------------------------- */
-
-.glass-card {
-  background: var(--glass-bg);
-  backdrop-filter: blur(var(--glass-blur)) saturate(140%);
-  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(140%);
-  border: 1px solid var(--glass-border);
-  border-radius: 20px;
-
-  box-shadow: var(--glass-shadow);
-
-  padding: 2.5rem;
-  margin-bottom: 2rem;
-
-  transition:
-    background 0.3s ease,
-    border-color 0.3s ease,
-    box-shadow 0.3s ease;
-}
-
-/* ----------------------------
-   LAYOUT
----------------------------- */
 
 .wrapper {
-  max-width: 900px;
+  max-width: 800px;
   margin: 0 auto;
   padding: 2rem 1rem;
 }
 
-/* ----------------------------
-   HEADER
----------------------------- */
-
+/* Header & Logo */
 header {
   text-align: center;
   margin-bottom: 2rem;
 }
 
 .logo-img {
-  max-width: 90%;
-  width: 450px;
+  max-width: 280px;
+  width: 100%;
   height: auto;
   margin-bottom: 1rem;
-  filter: drop-shadow(0 6px 18px rgba(0, 0, 0, 0.5));
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.3));
 }
 
-h1.business-name {
-  font-size: 2.5rem;
+.business-name {
+  font-size: 2rem;
   font-weight: 800;
   text-transform: uppercase;
-  letter-spacing: -1px;
   margin-bottom: 1.5rem;
-
-  background: linear-gradient(to right, var(--text-main), #b3e5fc);
+  background: linear-gradient(to right, #fff, #b3e5fc);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  background-clip: text;
+  /* Add text shadow for readability on clear glass */
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
 }
 
-html[data-theme="light"] h1.business-name {
+html[data-theme="light"] .business-name {
   background: linear-gradient(to right, #0d47a1, #2196f3);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  text-shadow: none;
 }
 
-/* ----------------------------
-   TYPOGRAPHY
----------------------------- */
+/* Glass Cards */
+.glass-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-border);
+  border-radius: 20px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  box-shadow: var(--glass-shadow);
+}
 
+.cta-card {
+  display: inline-block;
+  padding: 1.5rem 3rem;
+}
+
+/* Typography & Lists */
 h2 {
   color: var(--accent-color);
-  font-size: 1.8rem;
-  margin-bottom: 1rem;
   text-transform: uppercase;
   letter-spacing: 1px;
+  margin-top: 0;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
 }
-
 h3 {
-  font-size: 1.3rem;
-  margin-bottom: 0.5rem;
   color: var(--text-main);
-  font-weight: 600;
+  margin-bottom: 0.5rem;
 }
-
 p {
-  margin-bottom: 1rem;
   color: var(--text-muted);
-  font-size: 1.05rem;
+  line-height: 1.6;
+  font-weight: 500;
 }
 
-/* ----------------------------
-   CTA
----------------------------- */
+.check-list {
+  list-style: none;
+  padding: 0;
+}
+.check-list li {
+  margin-bottom: 0.8rem;
+  font-size: 1.05rem;
+  color: var(--text-muted);
+  font-weight: 500;
+}
 
+/* Chrome Buttons */
 .btn-cta {
   display: inline-block;
-  background: var(--accent-gradient);
-  color: #fff;
+  background: var(--chrome-gradient);
+  color: white;
   padding: 1rem 2.5rem;
-  border-radius: 999px;
+  border-radius: 50px;
   text-decoration: none;
   font-weight: 800;
-  font-size: 1.2rem;
-  margin-top: 1rem;
-  box-shadow: 0 6px 22px rgba(30, 87, 153, 0.45);
-  transition:
-    transform 0.2s ease,
-    box-shadow 0.2s ease;
   text-transform: uppercase;
+  border: var(--chrome-border);
+  box-shadow: var(--btn-shadow);
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s;
+  letter-spacing: 0.5px;
 }
 
 .btn-cta:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 0 30px var(--accent-color);
+  transform: translateY(-2px);
+  box-shadow: 0 0 25px rgba(0, 242, 254, 0.5);
 }
 
 .phone-number {
-  font-size: 2rem;
-  font-weight: 800;
+  font-size: 2.2rem;
+  font-weight: 900;
   color: var(--text-main);
-  margin: 0.5rem 0;
+  margin-bottom: 0.5rem;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
-/* ----------------------------
-   HERO
----------------------------- */
+.cta-subtitle {
+  margin: 0 0 1rem 0;
+  font-weight: 600;
+  color: var(--accent-color);
+}
 
+/* Grid & Hero */
 .hero-split {
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
   gap: 2rem;
+  align-items: center;
 }
-
-.hero-text,
-.hero-image {
+.hero-image,
+.hero-text {
   flex: 1;
   min-width: 300px;
 }
-
 .hero-image img {
   width: 100%;
   border-radius: 14px;
-  border: 1px solid var(--glass-border);
-  box-shadow: 0 14px 38px rgba(0, 0, 0, 0.45);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
 }
-
-/* ----------------------------
-   SERVICES GRID
----------------------------- */
 
 .item-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 1.5rem;
-  margin-top: 2rem;
+  margin-top: 1.5rem;
 }
-
 .item-card {
-  background: rgba(255, 255, 255, 0.06);
-  padding: 1.6rem;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 1.5rem;
   border-radius: 14px;
   border-left: 4px solid var(--accent-color);
-
-  box-shadow:
-    0 1px 0 rgba(255, 255, 255, 0.25) inset,
-    0 8px 22px rgba(0, 0, 0, 0.25);
-
-  transition:
-    background 0.3s ease,
-    transform 0.2s ease;
 }
-
 html[data-theme="light"] .item-card {
-  background: rgba(255, 255, 255, 0.7);
+  background: rgba(255, 255, 255, 0.4);
 }
 
-.item-card:hover {
-  transform: translateY(-2px);
-}
-
-/* ----------------------------
-   TESTIMONIALS
----------------------------- */
-
+/* Testimonials */
 .testimonial-block {
-  margin-top: 1.5rem;
-  font-style: italic;
-  border-left: 4px solid var(--accent-color);
-  padding: 1.2rem;
-  background: rgba(255, 255, 255, 0.06);
-  border-radius: 0 10px 10px 0;
+  border-bottom: 1px solid var(--glass-border);
+  padding-bottom: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+.testimonial-block:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
 }
 
-html[data-theme="light"] .testimonial-block {
-  background: rgba(0, 0, 0, 0.05);
-}
-
-.testimonial-block strong {
-  display: block;
-  margin-top: 0.5rem;
-  color: var(--text-main);
-  font-style: normal;
-}
-
-/* ----------------------------
-   FOOTER
----------------------------- */
-
+/* Footer - Unified Glass Style */
 footer {
   text-align: center;
-  margin-top: 4rem;
+  margin-top: 3rem;
   padding: 2rem;
-  font-size: 0.9rem;
+  border-radius: 20px;
 
-  width: 100vw;
-  margin-left: calc(-50vw + 50%);
+  /* Inherit standard glass variables */
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+
   color: var(--text-muted);
+  font-size: 0.95rem;
 }
 
+.footer-brand {
+  font-weight: bold;
+  font-size: 1.1rem;
+  color: var(--text-main);
+  margin-bottom: 0.5rem;
+}
 .footer-link {
   color: var(--accent-color);
   text-decoration: none;
   font-weight: 600;
 }
-
 .footer-credit {
-  font-size: 0.8rem;
-  opacity: 0.7;
-  margin-top: 1rem;
+  font-size: 0.85rem;
+  opacity: 0.8;
+  margin-top: 1.5rem;
+  line-height: 1.6;
+}
+
+/* Toggle Pill - Chrome Style */
+.theme-pill {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: var(--chrome-gradient);
+  border: var(--chrome-border);
+  color: #fff;
+  padding: 8px 16px;
+  border-radius: 30px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  z-index: 1000;
+  box-shadow: var(--btn-shadow);
+  transition: transform 0.2s ease;
+}
+.theme-pill:hover {
+  transform: scale(1.05);
+}
+.theme-label {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: #fff;
 }
