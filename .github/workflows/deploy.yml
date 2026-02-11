@@ -1,4 +1,4 @@
-name: Deploy to Hostinger (SSH rsync)
+name: Deploy to Hostinger (SSH rsync) 11 Feb 20026
 
 on:
   push:
